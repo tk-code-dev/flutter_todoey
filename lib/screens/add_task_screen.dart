@@ -44,12 +44,16 @@ class AddTaskScreen extends StatelessWidget {
             FlatButton(
               child: Text(
                 'Add',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                  color: Colors.white,
+                ),
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                final task = Task(name: newTaskTitle);
-                Provider.of<TaskData>(context).tasks.add(task);
+//                final task = Task(name: newTaskTitle);
+
+                Provider.of<TaskData>(context, listen: false)
+                    .addTask(newTaskTitle);
                 Navigator.pop(context);
               },
             ),
