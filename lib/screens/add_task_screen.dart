@@ -52,8 +52,8 @@ class AddTaskScreen extends StatelessWidget {
               onPressed: () {
 //                final task = Task(name: newTaskTitle);
 
-                Provider.of<TaskData>(context, listen: false)
-                    .addTask(newTaskTitle);
+                Provider.of<TaskData>(context, listen: false).addTask(
+                    newTaskTitle); // Fix Navigator is not popping, Add listen: false
                 Navigator.pop(context);
               },
             ),
