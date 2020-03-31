@@ -1,22 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_todoey/widgets/tasks_list.dart';
 import 'package:flutter_todoey/screens/add_task_screen.dart';
-import 'package:flutter_todoey/models/task.dart';
+import 'package:flutter_todoey/models/task_data.dart';
+import 'package:provider/provider.dart';
 
-class TasksScreen extends StatefulWidget {
-  @override
-  _TasksScreenState createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy Milk'),
-    Task(name: 'Buy Meat'),
-    Task(name: 'Buy Rice'),
-    Task(name: 'Buy Eggs'),
-    Task(name: 'Buy Fish'),
-  ];
-
+class TasksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,9 +16,9 @@ class _TasksScreenState extends State<TasksScreen> {
           showModalBottomSheet(
               context: context,
               builder: (context) => AddTaskScreen((newTaskTitle) {
-                    setState(() {
-                      tasks.add(Task(name: newTaskTitle));
-                    });
+//                    setState(() {
+//                      tasks.add(Task(name: newTaskTitle));
+//                    });
                     Navigator.pop(context);
                   }));
         },
@@ -65,9 +53,9 @@ class _TasksScreenState extends State<TasksScreen> {
                   ),
                 ),
                 Text(
-                  (tasks.length == 0)
-                      ? '${tasks.length} Task'
-                      : '${tasks.length} Tasks',
+                  (Provider.of<TaskData>(context).taskCount == 0)
+                      ? '${Provider.of<TaskData>(context).tasks.length} Task'
+                      : '${Provider.of<TaskData>(context).tasks.length} Tasks',
                   style: TextStyle(
                     fontSize: 18.0,
                     color: Colors.white,
@@ -88,7 +76,7 @@ class _TasksScreenState extends State<TasksScreen> {
                   topRight: Radius.circular(20.0),
                 ),
               ),
-              child: TasksList(tasks),
+              child: TasksList(),
             ),
           )
         ],

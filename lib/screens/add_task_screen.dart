@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_todoey/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_todoey/models/task_data.dart';
 
 String newTaskTitle;
 
@@ -45,7 +48,9 @@ class AddTaskScreen extends StatelessWidget {
               ),
               color: Colors.lightBlueAccent,
               onPressed: () {
-                addTaskCallback(newTaskTitle);
+                final task = Task(name: newTaskTitle);
+                Provider.of<TaskData>(context).tasks.add(task);
+                Navigator.pop(context);
               },
             ),
           ],
